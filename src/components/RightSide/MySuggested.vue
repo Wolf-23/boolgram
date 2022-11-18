@@ -2,7 +2,7 @@
     <div>
         <div class="suggestedHeader">
             <strong class="suggested">Suggerimenti per te:</strong>
-            <a class="suggestedLink myLink" href="#">Mostra tutti</a>
+            <a class="suggestedLink myLink" href="#" @click="showSuggested = !showSuggested">Mostra tutti</a>
         </div>
         <div v-if="loading == true">
             <div class="loadingSuggested" v-for="(profile, index) in listProfiles" :key="index">
@@ -10,9 +10,17 @@
                 <div class="profileNameLoading"></div>
             </div>
         </div>
-        <div class="singleProfileCont" v-for="(profile, index) in listProfiles" :key="index" v-else>
-            <img class="profileImg" :src="profile.profile_picture" alt="Profile Img">
-            <span class="profileName">{{ profile.profile_name }}</span>
+        <div v-else>
+            <div  v-if="showSuggested == true">
+                <div class="singleProfileCont" v-for="(profile, index) in listProfiles.slice(0,4)" :key="index">
+                    <img class="profileImg" :src="profile.profile_picture" alt="Profile Img">
+                    <span class="profileName">{{ profile.profile_name }}</span>
+                </div>
+            </div>
+            <div v-else class="singleProfileCont" v-for="(profile, x) in listProfiles" :key="x">
+                <img class="profileImg" :src="profile.profile_picture" alt="Profile Img">
+                <span class="profileName">{{ profile.profile_name }}</span>
+            </div>
         </div>
     </div>
 </template>
@@ -23,6 +31,11 @@
         props: {
             listProfiles: Array,
             loading: Boolean
+        },
+        data() {
+            return {
+                showSuggested: true,
+            }
         }
     }
 </script>
