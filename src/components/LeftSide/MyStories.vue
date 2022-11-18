@@ -3,14 +3,8 @@
     <div class="spinner" v-if="loading == true">
       <i class="fa-solid fa-spinner"></i>
     </div>
-    <div class="storyContainer" @click="showStory = !showStory">
+    <div class="storyContainer">
       <MySingleStory class="singleStory" v-for="(story, index) in listProfiles" :key="index" :story="story" :loading="loading"/>
-      <div class="showStory" v-if="showStory == false">
-        <i class="fa-solid fa-xmark" @click="showStory"></i>
-        <div class="storyImg">
-          <img src="../../assets/images/landscape.png" alt="Show Story" >
-        </div>
-      </div>
     </div>
   </div>
 </template>
@@ -19,11 +13,6 @@
   import MySingleStory from './SingleComponents/MySingleStory.vue'
   export default {
     name: 'MyStories',
-    data() {
-            return {
-                showStory: true
-            }
-        },
     components: { 
       MySingleStory 
     },
@@ -52,32 +41,6 @@
       width: 100%;
       @include aroundContent;
     }
-    .showStory {
-      position: absolute;
-      width: 500px;
-      height: 500px;
-      top: 50%;
-      left: 50%;
-      .storyImg {
-        @include centredContent;
-        width: 100%;
-        height: 100%;
-        img {
-          width: 500px;
-          height: 500px;
-        }
-      }
-      i {
-        position: absolute;
-        right: 10px;
-        top: 10px;
-        // font-size: 22px;
-        color: $boolgram-primary;
-        background-color: white;
-        padding: 5px;
-        border-radius: 10px;
-        cursor: pointer;
-      }
-    }
+    
   }
 </style>
